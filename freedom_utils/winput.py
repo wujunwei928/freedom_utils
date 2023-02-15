@@ -1,36 +1,32 @@
 import os
 import inquirer
+from decorators import ConsoleInputCheck, TryExcept
 
 
+@ConsoleInputCheck(wish_type=str, error_msg="你输入的目录不存在！！！")
 def get_dir_path(prompt):
-    while True:
-        dir_name = input(prompt).strip()
-        if os.path.exists(dir_name):
-            return dir_name
-        else:
-            print("你输入的目录不存在！！！")
+    dir_name = input(prompt).strip()
+    if os.path.exists(dir_name):
+        return dir_name
 
 
+@ConsoleInputCheck(wish_type=str, error_msg="你输入的字符串为空！！！")
 def get_str(prompt):
-    while True:
-        trip_input = input(prompt).strip()
-        if len(trip_input) > 0:
-            return trip_input
-        else:
-            print("你输入的字符串为空！！！")
+    trip_input = input(prompt).strip()
+    if len(trip_input) > 0:
+        return trip_input
 
 
+@ConsoleInputCheck(wish_type=int, error_msg="")
+@TryExcept(error_msg="你输入的不是整数！！！")
 def get_int(prompt):
-    while True:
-        trip_input = input(prompt).strip()
-        # noinspection PyBroadException
-        try:
-            int_val = int(trip_input)
-            return int_val
-        except Exception as err:
-            print("你输入的不是整数！！！", str(err))
+    trip_input = input(prompt).strip()
+    int_val = int(trip_input)
+    return int_val
 
 
+@ConsoleInputCheck(wish_type=int, error_msg="")
+@TryExcept(error_msg="你输入的不是整数！！！")
 def get_int_range(prompt, min_num, max_num):
     """
     输入取值范围内的int值
@@ -42,17 +38,12 @@ def get_int_range(prompt, min_num, max_num):
     Returns:
 
     """
-    while True:
-        trip_input = input(prompt).strip()
-        # noinspection PyBroadException
-        try:
-            int_val = int(trip_input)
-            if min_num <= int_val <= max_num:
-                return int_val
-            else:
-                print(f"你输入整数超出指定范围[{min_num},{max_num}] ！！！")
-        except Exception as err:
-            print("你输入的不是整数！！！", str(err))
+    trip_input = input(prompt).strip()
+    int_val = int(trip_input)
+    if min_num <= int_val <= max_num:
+        return int_val
+    else:
+        print(f"你输入整数超出指定范围[{min_num},{max_num}] ！！！")
 
 
 def get_select_input(prompt_head, prompt_foot, choices_list):
