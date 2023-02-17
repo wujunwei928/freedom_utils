@@ -1,6 +1,6 @@
 import os
 import inquirer
-from decorators import ConsoleInputCheck, TryExcept
+from .decorators import ConsoleInputCheck, TryExcept
 
 
 @ConsoleInputCheck(wish_type=str, error_msg="你输入的目录不存在！！！")
