@@ -2,6 +2,35 @@ import datetime
 import calendar
 
 
+def parse_from_timestamp(timestamp, fmt):
+    """
+    从时间戳解析时间
+    Args:
+        timestamp: 时间戳
+        fmt: 格式化方式, 如: %Y-%m-%d
+
+    Returns:
+
+    """
+    dt = datetime.datetime.fromtimestamp(timestamp)
+    return FmtDatetime(dt, fmt)
+
+
+def parse_from_date_string(date_string, fmt):
+    """
+    从日期字符串中解析时间
+    Args:
+        date_string: 日期字符串, 如: 2022-02-22
+        fmt: 格式化方式, 如: %Y-%m-%d
+
+    Returns:
+        wtime.FmtDatetime
+
+    """
+    dt = datetime.datetime.strptime(date_string, fmt)
+    return FmtDatetime(dt, fmt)
+
+
 class FmtDatetime(object):
     """
     以指定fmt格式, 初始化dt时间相关的所有周边时间
